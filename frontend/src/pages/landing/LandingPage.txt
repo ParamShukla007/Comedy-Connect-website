@@ -1,0 +1,309 @@
+import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Mic, Calendar, MapPin, Users, Ticket, Star, ArrowRight, Laugh, ThumbsUp, Clock, DollarSign } from 'lucide-react';
+import { FloatingEmoji } from "@/components/landing/FloatingEmoji";
+import { TestimonialCard } from "@/components/landing/TestimonialCard";
+import { FeatureCard } from "@/components/landing/FeatureCard";
+
+const LandingPage = () => {
+      y: [-20, 20], 
+      opacity: [0, 1, 0],
+      rotate: [-10, 10]
+    }}
+    transition={{ 
+      duration: 3,
+      delay,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }}
+    className="absolute text-4xl"
+    style={{ left: `${x}%`, top: `${y}%` }}
+  >
+    {emoji}
+  </motion.div>
+);
+
+const TestimonialCard = ({ name, role, content, delay }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay }}
+    className="bg-gray-800/50 backdrop-blur-xl p-6 rounded-lg border border-gray-700"
+  >
+    <p className="text-gray-300 mb-4">"{content}"</p>
+    <div className="flex items-center">
+      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-pink-500 flex items-center justify-center">
+        {name[0]}
+      </div>
+      <div className="ml-3">
+        <h4 className="font-semibold">{name}</h4>
+        <p className="text-sm text-gray-400">{role}</p>
+      </div>
+    </div>
+  </motion.div>
+);
+
+const FeatureCard = ({ icon, title, description, color }) => (
+  <motion.div
+    whileHover={{ y: -10 }}
+    className="relative"
+  >
+    <Card className="p-6 bg-gray-800/50 backdrop-blur-xl border-gray-700 overflow-hidden">
+      <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${color} flex items-center justify-center mb-4`}>
+        {icon}
+      </div>
+      <h3 className="text-2xl font-bold mb-2">{title}</h3>
+      <p className="text-gray-300">{description}</p>
+    </Card>
+  </motion.div>
+);
+
+const LandingPage = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const { scrollY } = useScroll();
+  const backgroundY = useTransform(scrollY, [0, 1000], [0, 200]);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Generate random positions for emojis across the hero section
+  const emojiPositions = [
+    { emoji: '😂', x: 15, y: 20 },
+    { emoji: '🎭', x: 75, y: 15 },
+    { emoji: '🎪', x: 85, y: 60 },
+    { emoji: '🎵', x: 25, y: 70 },
+    { emoji: '🎨', x: 45, y: 40 },
+    { emoji: '✨', x: 65, y: 80 },
+    { emoji: '🎤', x: 35, y: 25 },
+    { emoji: '🌟', x: 55, y: 65 }
+  ];
+
+  return (
+    <div className="relative min-h-screen overflow-x-hidden bg-gray-900">
+      {/* Animated Background Pattern */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div 
+          className="absolute inset-0 opacity-10"
+          style={{ 
+            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+            backgroundSize: '50px 50px',
+            y: backgroundY
+          }}
+        />
+      </div>
+
+      {/* Hero Section */}
+      <div className="relative min-h-screen">
+        {/* Distributed Floating Emojis */}
+        {emojiPositions.map((item, index) => (
+          <FloatingEmoji 
+            key={index}
+            emoji={item.emoji}
+            x={item.x}
+            y={item.y}
+            delay={index * 0.5}
+          />
+        ))}
+
+        {/* Main Content */}
+        <div className="relative container mx-auto px-4 pt-32">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            <motion.div
+              animate={{ 
+                rotate: [-2, 2],
+                y: [-5, 5]
+              }}
+              transition={{ 
+                duration: 4,
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+              className="inline-block"
+            >
+              <h1 className="text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 text-transparent bg-clip-text">
+                Laugh. Connect. Create.
+              </h1>
+            </motion.div>
+            
+            <p className="text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+              Where comedy dreams come true. Connect with venues, discover talent,
+              and be part of the next big laugh.
+            </p>
+
+            <div className="flex gap-4 justify-center">
+              <motion.div 
+                className="relative inline-block group"
+                whileHover={{ scale: 1.05 }}
+                onHoverStart={() => setIsHovered(true)}
+                onHoverEnd={() => setIsHovered(false)}
+              >
+                <Button size="lg" className="bg-gradient-to-r from-yellow-400 to-pink-500 text-black hover:from-yellow-500 hover:to-pink-600 px-8 py-6 text-xl">
+                  Start Your Comedy Journey
+                  <motion.span
+                    animate={{ x: isHovered ? 10 : 0 }}
+                    className="ml-2"
+                  >
+                    →
+                  </motion.span>
+                </Button>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="inline-block"
+              >
+                <Button size="lg" variant="outline" className="border-yellow-400 text-yellow-400 hover:bg-yellow-400/10 px-8 py-6 text-xl">
+                  Browse Shows
+                </Button>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Features Section */}
+      <section className="py-24 relative">
+        <div className="container mx-auto px-4">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-yellow-400 to-pink-500 text-transparent bg-clip-text"
+          >
+            Everything You Need to Succeed
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <FeatureCard
+              icon={<Calendar className="w-8 h-8" />}
+              title="Smart Scheduling"
+              description="AI-powered scheduling system that helps you find the perfect time slots for your shows"
+              color="from-yellow-400 to-orange-500"
+            />
+            <FeatureCard
+              icon={<DollarSign className="w-8 h-8" />}
+              title="Seamless Payments"
+              description="Secure payment processing with instant transfers and detailed financial reporting"
+              color="from-pink-400 to-purple-500"
+            />
+            <FeatureCard
+              icon={<Users className="w-8 h-8" />}
+              title="Community Building"
+              description="Connect with other comedians, venues, and fans to grow your network"
+              color="from-blue-400 to-indigo-500"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Statistics Section */}
+      <section className="py-24 bg-gradient-to-r from-yellow-400/10 to-pink-500/10">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { number: "10K+", label: "Shows Booked" },
+              { number: "500+", label: "Partner Venues" },
+              { number: "2M+", label: "Tickets Sold" },
+              { number: "50K+", label: "Active Users" }
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-4xl font-bold text-yellow-400 mb-2">{stat.number}</div>
+                <div className="text-gray-300">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-24 relative">
+        <div className="container mx-auto px-4">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-yellow-400 to-pink-500 text-transparent bg-clip-text"
+          >
+            What Our Community Says
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <TestimonialCard
+              name="Sarah Johnson"
+              role="Stand-up Comedian"
+              content="This platform has completely transformed how I book and manage my shows. The exposure to new venues and audiences is incredible!"
+              delay={0.1}
+            />
+            <TestimonialCard
+              name="Mike Richards"
+              role="Venue Owner"
+              content="Managing comedy events has never been easier. The automated scheduling and payment systems save us hours of work."
+              delay={0.2}
+            />
+            <TestimonialCard
+              name="Alex Chen"
+              role="Comedy Fan"
+              content="I love how easy it is to discover new shows and comedians. The booking process is seamless, and I never miss my favorite performers."
+              delay={0.3}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="py-24 bg-gradient-to-r from-yellow-400/20 to-pink-500/20">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="max-w-3xl mx-auto"
+          >
+            <h2 className="text-4xl font-bold mb-6">Ready to Join the Comedy Revolution?</h2>
+            <p className="text-xl text-gray-300 mb-8">
+              Start your journey today and be part of the fastest-growing comedy community.
+            </p>
+            <div className="flex gap-4 justify-center">
+              <Button size="lg" className="bg-gradient-to-r from-yellow-400 to-pink-500 text-black hover:from-yellow-500 hover:to-pink-600 px-8 py-6 text-xl">
+                Get Started Now
+              </Button>
+              <Button size="lg" variant="outline" className="border-yellow-400 text-yellow-400 hover:bg-yellow-400/10 px-8 py-6 text-xl">
+                Schedule a Demo
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Mouse Trailer */}
+      <motion.div
+        className="fixed w-8 h-8 rounded-full bg-gradient-to-r from-yellow-400 to-pink-500 mix-blend-screen pointer-events-none opacity-50 z-50"
+        animate={{
+          x: mousePosition.x - 16,
+          y: mousePosition.y - 16,
+          scale: isHovered ? 2 : 1
+        }}
+        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+      />
+    </div>
+  );
+};
+
+export default LandingPage;

@@ -1,0 +1,121 @@
+{
+  "VENUE": [
+    {
+      "title": "Dashboard",
+      "icon": "LayoutDashboard",
+      "path": "/venue"
+    },
+    {
+      "title": "Profile",
+      "icon": "User",
+      "path": "/venue/profile"
+    },
+    {
+      "title": "Booking Proposals",
+      "icon": "Building2",
+      "path": "/venue/manage"
+    },
+    {
+      "title": "Manage Venues",
+      "icon": "CalendarCheck",
+      "path": "/venue/proposals"
+    },
+    {
+      "title": "Analytics",
+      "icon": "BarChart3",
+      "path": "/venue/analytics"
+    }
+  ],
+  "ARTIST": [
+    {
+      "title": "Dashboard",
+      "icon": "LayoutDashboard",
+      "path": "/artist"
+    },
+    {
+      "title": "Profile",
+      "icon": "User",
+      "path": "/artist/profile"
+    },
+    {
+      "title": "Browse Venues",
+      "icon": "Search",
+      "path": "/artist/venues"
+    },
+    {
+      "title": "My Proposals",
+      "icon": "FileText",
+      "path": "/artist/addshow"
+    },
+    {
+      "title": "Performance Stats",
+      "icon": "BarChart3",
+      "path": "/artist/stats"
+    },
+    {
+      "title": "Add post",
+      "icon": "BarChart3",
+      "path": "/artist/addpost"
+    }
+  ],
+  "ADMIN": [
+    {
+      "title": "Dashboard",
+      "icon": "LayoutDashboard",
+      "path": "/admin"
+    },
+    {
+      "title": "User Management",
+      "icon": "Users",
+      "path": "/admin/users"
+    },
+    {
+      "title": "Event Proposals",
+      "icon": "CalendarCheck",
+      "path": "/admin/proposal"
+    },
+    {
+      "title": "Content Moderation",
+      "icon": "Shield",
+      "path": "/admin/moderation"
+    },
+    {
+      "title": "Platform Analytics",
+      "icon": "BarChart3",
+      "path": "/admin/analytics"
+    }
+  ],
+  "CUSTOMER": [
+    {
+      "title": "Dashboard",
+      "icon": "Home",
+      "path": "/customer"
+    },
+    {
+      "title": "Browse Events",
+      "icon": "Search",
+      "path": "/customer/events"
+    },
+    
+    {
+      "title": "My Tickets",
+      "icon": "Ticket",
+      "path": "/customer/tickets"
+    },
+    {
+      "title": "Following",
+      "icon": "Heart",
+      "path": "/customer/following"
+    },
+    {
+      "title": "Profile",
+      "icon": "User",
+      "path": "/customer/profile"
+    },
+    {
+      "title": "WishList",
+      "icon": "User",
+      "path": "/customer/wishlist"
+    }
+  ]
+}

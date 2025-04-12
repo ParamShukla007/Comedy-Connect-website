@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    /* Light mode colors */
+    --background: #ffffff;
+    --foreground: #000000;
+    --card: #f5f5f5;
+    --primary: #dead84;
+    --primary-foreground: #021E39;
+    --secondary: #021E39;
+    --secondary-foreground: #ffffff;
+    --accent: #dead84;
+    --accent-hover: #c79b6b;
+    --accent-foreground: #000000;
+    --muted: #aaaaaa;
+    --muted-foreground: #666666;
+    --border: #d3d3d3;
+    --font-primary: 'Poppins', sans-serif;
+    --font-secondary: 'Montserrat', sans-serif;
+  }
+
+  .dark {
+    /* Dark mode colors */
+    --background: #021E39;
+    --foreground: #ffffff;
+    --card: #1a2a3a;
+    --primary: #dead84;
+    --primary-foreground: #000000;
+    --secondary: #dead84;
+    --secondary-foreground: #000000;
+    --accent: #dead84;
+    --accent-hover: #c79b6b;
+    --accent-foreground: #000000;
+    --muted: #666666;
+    --muted-foreground: #aaaaaa;
+    --border: #1a2a3a;
+  }
+}
+
+
+@layer components {
+  .spotlight-glow {
+    @apply relative;
+  }
+
+  .spotlight-glow::after {
+    content: "";
+    @apply absolute inset-0 bg-accent/5 hover:bg-accent/10 transition-colors duration-300 rounded-md;
+  }
+}
+
+* {
+  @apply border-border font-[var(--font-primary)];
+}
+
+body {
+  @apply bg-background text-foreground transition-colors duration-300;
+  font-family: var(--font-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-secondary);
+}
+
+/* Additional Components */
+.auth-card {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2) !important;
+}
+
+.auth-input {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.auth-select {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.auth-select-content {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+.dark .glass-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.venue-card {
+  transition: all 0.3s ease;
+}
+
+.venue-card:hover {
+  transform: translateY(-5px);
+}
+
+.show-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.show-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
+  z-index: 0;
+}
+
+.dark .show-card::before {
+  background: linear-gradient(
+    to right bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.1)
+  );
+}
+
+/* Venue Carousel Styles */
+.venue-carousel .slick-dots {
+  bottom: -10px;
+}
+
+.venue-carousel .slick-dots li button:before {
+  color: var(--primary);
+}
+
+.venue-carousel .slick-prev,
+.venue-carousel .slick-next {
+  display: none !important;
+}
+
+.venue-carousel .slick-slide {
+  padding: 0.5rem;
+}
+
+.venue-carousel .slick-list {
+  margin: -0.5rem 0;
+}
+
+.venue-carousel .slick-track {
+  display: flex;
+  gap: 1rem;
+}
